@@ -1,0 +1,21 @@
+{
+  "name": "S3Dataset",
+  "properties": {
+    "type": "AmazonS3Object",
+    "linkedServiceName": {
+      "referenceName": "AmazonS3LinkedService",
+      "type": "LinkedServiceReference"
+    },
+    "annotations": [],
+    "typeProperties": {
+      "folderPath": "s3://bucket-name/path/to/folder",
+      "format": {
+        "type": "JsonFormat"
+      },
+      "compression": {
+        "type": "GZip"
+      },
+      "recursive": true
+    }
+  }
+}

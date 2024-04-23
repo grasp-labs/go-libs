@@ -16,3 +16,13 @@ awslocal --endpoint-url=http://localhost:4566 dynamodb create-table \
     --region "eu-north-1" \
     --profile test-profile \
     --output table
+
+awslocal --endpoint-url=http://localhost:4566 s3api create-bucket \
+    --bucket test \
+    --profile test-profile \
+    --create-bucket-configuration LocationConstraint=eu-central-1 \
+    --region eu-central-1 \
+    --output table
+
+awslocal --endpoint-url=http://localhost:4566 s3 \
+    cp /tmp/s3/dataset.json s3://test/tenant/c15e32af-71db-4fda-b4e6-2831b1f2b044/workflows/dataset/dataset.json

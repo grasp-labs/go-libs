@@ -12,6 +12,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	"github.com/grasp-labs/go-libs/aws/dynamodb"
 	"github.com/grasp-labs/go-libs/aws/paramstore"
+	"github.com/grasp-labs/go-libs/aws/s3"
 	"github.com/grasp-labs/go-libs/aws/sqs"
 	"github.com/stretchr/testify/assert"
 )
@@ -109,4 +110,29 @@ func TestDynamoDB(t *testing.T) {
 		assert.NoError(t, err)
 		return
 	}
+}
+
+func TestS3(t *testing.T) {
+	wantObj := "{\r\n  \"name\": \"S3Dataset\",\r\n  \"properties\": {\r\n    \"type\": \"AmazonS3Object\",\r\n    \"linkedServiceName\": {\r\n      \"referenceName\": \"AmazonS3LinkedService\",\r\n      \"type\": \"LinkedServiceReference\"\r\n    },\r\n    \"annotations\": [],\r\n    \"typeProperties\": {\r\n      \"folderPath\": \"s3://bucket-name/path/to/folder\",\r\n      \"format\": {\r\n        \"type\": \"JsonFormat\"\r\n      },\r\n      \"compression\": {\r\n        \"type\": \"GZip\"\r\n      },\r\n      \"recursive\": true\r\n    }\r\n  }\r\n}"
+	if testing.Short() {
+		t.Skip("skipping integration test")
+	}
+
+	if err := os.Setenv("BUILDING_MODE", "test"); err != nil {
+		assert.NoError(t, err)
+		return
+	}
+
+	client, err := s3.NewClient(context.Background())
+	if err != nil {
+		assert.NoError(t, err)
+		return
+	}
+	obj, err := client.GetObject(context.Background(), "test/", "tenant/c15e32af-71db-4fda-b4e6-2831b1f2b044/workflows/dataset/dataset.json")
+	if err != nil {
+		assert.NoError(t, err)
+		return
+	}
+
+	assert.Equal(t, wantObj, string(obj))
 }
