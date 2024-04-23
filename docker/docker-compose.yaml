@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  daas-service-ssm:
+    image: localstack/localstack:3.1
+    environment:
+      - SERVICES=ssm,sqs,dynamodb
+      - AWS_DEFAULT_REGION=eu-central-1
+      - EDGE_PORT=4566
+      - CLEAR_TMP_FOLDER=0
+      - DEBUG=1
+    ports:
+      - '4566-4597:4566-4597'
+    volumes:
+      - "./init/aws/init-aws.sh:/etc/localstack/init/ready.d/init-aws.sh"
+      - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./data/recipes.json:/tmp/s3/recipes.json"
