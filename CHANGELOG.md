@@ -10,19 +10,19 @@
 * CHANGELOG.md: Add changelog file with content.
 * README.md: Update file for missing AWS services and how to write integration tests.
 
-## v1.0.2 - 2024-04-24
+## v1.0.2 - 2024-04-23
 
 ### Enhancements
 
 * S3: Add Get object function.
 
-## v1.0.1 - 2024-04-24
+## v1.0.1 - 2024-04-23
 
 ### Chore
 
 * Update go.mod file
 
-## v1.0.0 - 2024-04-24
+## v1.0.0 - 2024-04-23
 
 ### Enhancements
 
