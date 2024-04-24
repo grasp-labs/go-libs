@@ -22,14 +22,88 @@ func (_m *APIS3) EXPECT() *APIS3_Expecter {
 	return &APIS3_Expecter{mock: &_m.Mock}
 }
 
-// GetObject provides a mock function with given fields: _a0, _a1, _a2
-func (_m *APIS3) GetObject(_a0 context.Context, _a1 *s3.GetObjectInput, _a2 ...func(*s3.Options)) (*s3.GetObjectOutput, error) {
-	_va := make([]interface{}, len(_a2))
-	for _i := range _a2 {
-		_va[_i] = _a2[_i]
+// DeleteObject provides a mock function with given fields: ctx, params, optFns
+func (_m *APIS3) DeleteObject(ctx context.Context, params *s3.DeleteObjectInput, optFns ...func(*s3.Options)) (*s3.DeleteObjectOutput, error) {
+	_va := make([]interface{}, len(optFns))
+	for _i := range optFns {
+		_va[_i] = optFns[_i]
 	}
 	var _ca []interface{}
-	_ca = append(_ca, _a0, _a1)
+	_ca = append(_ca, ctx, params)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for DeleteObject")
+	}
+
+	var r0 *s3.DeleteObjectOutput
+	var r1 error
+	if rf, ok := ret.Get(0).(func(context.Context, *s3.DeleteObjectInput, ...func(*s3.Options)) (*s3.DeleteObjectOutput, error)); ok {
+		return rf(ctx, params, optFns...)
+	}
+	if rf, ok := ret.Get(0).(func(context.Context, *s3.DeleteObjectInput, ...func(*s3.Options)) *s3.DeleteObjectOutput); ok {
+		r0 = rf(ctx, params, optFns...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*s3.DeleteObjectOutput)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(context.Context, *s3.DeleteObjectInput, ...func(*s3.Options)) error); ok {
+		r1 = rf(ctx, params, optFns...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// APIS3_DeleteObject_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'DeleteObject'
+type APIS3_DeleteObject_Call struct {
+	*mock.Call
+}
+
+// DeleteObject is a helper method to define mock.On call
+//   - ctx context.Context
+//   - params *s3.DeleteObjectInput
+//   - optFns ...func(*s3.Options)
+func (_e *APIS3_Expecter) DeleteObject(ctx interface{}, params interface{}, optFns ...interface{}) *APIS3_DeleteObject_Call {
+	return &APIS3_DeleteObject_Call{Call: _e.mock.On("DeleteObject",
+		append([]interface{}{ctx, params}, optFns...)...)}
+}
+
+func (_c *APIS3_DeleteObject_Call) Run(run func(ctx context.Context, params *s3.DeleteObjectInput, optFns ...func(*s3.Options))) *APIS3_DeleteObject_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		variadicArgs := make([]func(*s3.Options), len(args)-2)
+		for i, a := range args[2:] {
+			if a != nil {
+				variadicArgs[i] = a.(func(*s3.Options))
+			}
+		}
+		run(args[0].(context.Context), args[1].(*s3.DeleteObjectInput), variadicArgs...)
+	})
+	return _c
+}
+
+func (_c *APIS3_DeleteObject_Call) Return(_a0 *s3.DeleteObjectOutput, _a1 error) *APIS3_DeleteObject_Call {
+	_c.Call.Return(_a0, _a1)
+	return _c
+}
+
+func (_c *APIS3_DeleteObject_Call) RunAndReturn(run func(context.Context, *s3.DeleteObjectInput, ...func(*s3.Options)) (*s3.DeleteObjectOutput, error)) *APIS3_DeleteObject_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// GetObject provides a mock function with given fields: ctx, input, optFns
+func (_m *APIS3) GetObject(ctx context.Context, input *s3.GetObjectInput, optFns ...func(*s3.Options)) (*s3.GetObjectOutput, error) {
+	_va := make([]interface{}, len(optFns))
+	for _i := range optFns {
+		_va[_i] = optFns[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, ctx, input)
 	_ca = append(_ca, _va...)
 	ret := _m.Called(_ca...)
 
@@ -40,10 +114,10 @@ func (_m *APIS3) GetObject(_a0 context.Context, _a1 *s3.GetObjectInput, _a2 ...f
 	var r0 *s3.GetObjectOutput
 	var r1 error
 	if rf, ok := ret.Get(0).(func(context.Context, *s3.GetObjectInput, ...func(*s3.Options)) (*s3.GetObjectOutput, error)); ok {
-		return rf(_a0, _a1, _a2...)
+		return rf(ctx, input, optFns...)
 	}
 	if rf, ok := ret.Get(0).(func(context.Context, *s3.GetObjectInput, ...func(*s3.Options)) *s3.GetObjectOutput); ok {
-		r0 = rf(_a0, _a1, _a2...)
+		r0 = rf(ctx, input, optFns...)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*s3.GetObjectOutput)
@@ -51,7 +125,7 @@ func (_m *APIS3) GetObject(_a0 context.Context, _a1 *s3.GetObjectInput, _a2 ...f
 	}
 
 	if rf, ok := ret.Get(1).(func(context.Context, *s3.GetObjectInput, ...func(*s3.Options)) error); ok {
-		r1 = rf(_a0, _a1, _a2...)
+		r1 = rf(ctx, input, optFns...)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -65,15 +139,15 @@ type APIS3_GetObject_Call struct {
 }
 
 // GetObject is a helper method to define mock.On call
-//   - _a0 context.Context
-//   - _a1 *s3.GetObjectInput
-//   - _a2 ...func(*s3.Options)
-func (_e *APIS3_Expecter) GetObject(_a0 interface{}, _a1 interface{}, _a2 ...interface{}) *APIS3_GetObject_Call {
+//   - ctx context.Context
+//   - input *s3.GetObjectInput
+//   - optFns ...func(*s3.Options)
+func (_e *APIS3_Expecter) GetObject(ctx interface{}, input interface{}, optFns ...interface{}) *APIS3_GetObject_Call {
 	return &APIS3_GetObject_Call{Call: _e.mock.On("GetObject",
-		append([]interface{}{_a0, _a1}, _a2...)...)}
+		append([]interface{}{ctx, input}, optFns...)...)}
 }
 
-func (_c *APIS3_GetObject_Call) Run(run func(_a0 context.Context, _a1 *s3.GetObjectInput, _a2 ...func(*s3.Options))) *APIS3_GetObject_Call {
+func (_c *APIS3_GetObject_Call) Run(run func(ctx context.Context, input *s3.GetObjectInput, optFns ...func(*s3.Options))) *APIS3_GetObject_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		variadicArgs := make([]func(*s3.Options), len(args)-2)
 		for i, a := range args[2:] {
@@ -92,6 +166,80 @@ func (_c *APIS3_GetObject_Call) Return(_a0 *s3.GetObjectOutput, _a1 error) *APIS
 }
 
 func (_c *APIS3_GetObject_Call) RunAndReturn(run func(context.Context, *s3.GetObjectInput, ...func(*s3.Options)) (*s3.GetObjectOutput, error)) *APIS3_GetObject_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// PutObject provides a mock function with given fields: ctx, params, optFns
+func (_m *APIS3) PutObject(ctx context.Context, params *s3.PutObjectInput, optFns ...func(*s3.Options)) (*s3.PutObjectOutput, error) {
+	_va := make([]interface{}, len(optFns))
+	for _i := range optFns {
+		_va[_i] = optFns[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, ctx, params)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for PutObject")
+	}
+
+	var r0 *s3.PutObjectOutput
+	var r1 error
+	if rf, ok := ret.Get(0).(func(context.Context, *s3.PutObjectInput, ...func(*s3.Options)) (*s3.PutObjectOutput, error)); ok {
+		return rf(ctx, params, optFns...)
+	}
+	if rf, ok := ret.Get(0).(func(context.Context, *s3.PutObjectInput, ...func(*s3.Options)) *s3.PutObjectOutput); ok {
+		r0 = rf(ctx, params, optFns...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*s3.PutObjectOutput)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(context.Context, *s3.PutObjectInput, ...func(*s3.Options)) error); ok {
+		r1 = rf(ctx, params, optFns...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// APIS3_PutObject_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'PutObject'
+type APIS3_PutObject_Call struct {
+	*mock.Call
+}
+
+// PutObject is a helper method to define mock.On call
+//   - ctx context.Context
+//   - params *s3.PutObjectInput
+//   - optFns ...func(*s3.Options)
+func (_e *APIS3_Expecter) PutObject(ctx interface{}, params interface{}, optFns ...interface{}) *APIS3_PutObject_Call {
+	return &APIS3_PutObject_Call{Call: _e.mock.On("PutObject",
+		append([]interface{}{ctx, params}, optFns...)...)}
+}
+
+func (_c *APIS3_PutObject_Call) Run(run func(ctx context.Context, params *s3.PutObjectInput, optFns ...func(*s3.Options))) *APIS3_PutObject_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		variadicArgs := make([]func(*s3.Options), len(args)-2)
+		for i, a := range args[2:] {
+			if a != nil {
+				variadicArgs[i] = a.(func(*s3.Options))
+			}
+		}
+		run(args[0].(context.Context), args[1].(*s3.PutObjectInput), variadicArgs...)
+	})
+	return _c
+}
+
+func (_c *APIS3_PutObject_Call) Return(_a0 *s3.PutObjectOutput, _a1 error) *APIS3_PutObject_Call {
+	_c.Call.Return(_a0, _a1)
+	return _c
+}
+
+func (_c *APIS3_PutObject_Call) RunAndReturn(run func(context.Context, *s3.PutObjectInput, ...func(*s3.Options)) (*s3.PutObjectOutput, error)) *APIS3_PutObject_Call {
 	_c.Call.Return(run)
 	return _c
 }

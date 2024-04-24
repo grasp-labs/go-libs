@@ -21,6 +21,54 @@ func (_m *ClientS3) EXPECT() *ClientS3_Expecter {
 	return &ClientS3_Expecter{mock: &_m.Mock}
 }
 
+// DeleteObject provides a mock function with given fields: ctx, bucketName, key
+func (_m *ClientS3) DeleteObject(ctx context.Context, bucketName string, key string) error {
+	ret := _m.Called(ctx, bucketName, key)
+
+	if len(ret) == 0 {
+		panic("no return value specified for DeleteObject")
+	}
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, string, string) error); ok {
+		r0 = rf(ctx, bucketName, key)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// ClientS3_DeleteObject_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'DeleteObject'
+type ClientS3_DeleteObject_Call struct {
+	*mock.Call
+}
+
+// DeleteObject is a helper method to define mock.On call
+//   - ctx context.Context
+//   - bucketName string
+//   - key string
+func (_e *ClientS3_Expecter) DeleteObject(ctx interface{}, bucketName interface{}, key interface{}) *ClientS3_DeleteObject_Call {
+	return &ClientS3_DeleteObject_Call{Call: _e.mock.On("DeleteObject", ctx, bucketName, key)}
+}
+
+func (_c *ClientS3_DeleteObject_Call) Run(run func(ctx context.Context, bucketName string, key string)) *ClientS3_DeleteObject_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(context.Context), args[1].(string), args[2].(string))
+	})
+	return _c
+}
+
+func (_c *ClientS3_DeleteObject_Call) Return(_a0 error) *ClientS3_DeleteObject_Call {
+	_c.Call.Return(_a0)
+	return _c
+}
+
+func (_c *ClientS3_DeleteObject_Call) RunAndReturn(run func(context.Context, string, string) error) *ClientS3_DeleteObject_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // GetObject provides a mock function with given fields: ctx, bucket, key
 func (_m *ClientS3) GetObject(ctx context.Context, bucket string, key string) ([]byte, error) {
 	ret := _m.Called(ctx, bucket, key)
@@ -77,6 +125,55 @@ func (_c *ClientS3_GetObject_Call) Return(_a0 []byte, _a1 error) *ClientS3_GetOb
 }
 
 func (_c *ClientS3_GetObject_Call) RunAndReturn(run func(context.Context, string, string) ([]byte, error)) *ClientS3_GetObject_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// PutObject provides a mock function with given fields: ctx, bucket, key, data
+func (_m *ClientS3) PutObject(ctx context.Context, bucket string, key string, data []byte) error {
+	ret := _m.Called(ctx, bucket, key, data)
+
+	if len(ret) == 0 {
+		panic("no return value specified for PutObject")
+	}
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, string, string, []byte) error); ok {
+		r0 = rf(ctx, bucket, key, data)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// ClientS3_PutObject_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'PutObject'
+type ClientS3_PutObject_Call struct {
+	*mock.Call
+}
+
+// PutObject is a helper method to define mock.On call
+//   - ctx context.Context
+//   - bucket string
+//   - key string
+//   - data []byte
+func (_e *ClientS3_Expecter) PutObject(ctx interface{}, bucket interface{}, key interface{}, data interface{}) *ClientS3_PutObject_Call {
+	return &ClientS3_PutObject_Call{Call: _e.mock.On("PutObject", ctx, bucket, key, data)}
+}
+
+func (_c *ClientS3_PutObject_Call) Run(run func(ctx context.Context, bucket string, key string, data []byte)) *ClientS3_PutObject_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(context.Context), args[1].(string), args[2].(string), args[3].([]byte))
+	})
+	return _c
+}
+
+func (_c *ClientS3_PutObject_Call) Return(_a0 error) *ClientS3_PutObject_Call {
+	_c.Call.Return(_a0)
+	return _c
+}
+
+func (_c *ClientS3_PutObject_Call) RunAndReturn(run func(context.Context, string, string, []byte) error) *ClientS3_PutObject_Call {
 	_c.Call.Return(run)
 	return _c
 }

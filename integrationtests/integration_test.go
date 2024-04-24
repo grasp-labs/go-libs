@@ -82,7 +82,7 @@ func TestSQSIntegration(t *testing.T) {
 	}
 }
 
-func TestDynamoDB(t *testing.T) {
+func TestDynamoDBIntegration(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping integration test")
 	}
@@ -112,7 +112,7 @@ func TestDynamoDB(t *testing.T) {
 	}
 }
 
-func TestS3(t *testing.T) {
+func TestS3Integration(t *testing.T) {
 	wantObj := "{\r\n  \"name\": \"S3Dataset\",\r\n  \"properties\": {\r\n    \"type\": \"AmazonS3Object\",\r\n    \"linkedServiceName\": {\r\n      \"referenceName\": \"AmazonS3LinkedService\",\r\n      \"type\": \"LinkedServiceReference\"\r\n    },\r\n    \"annotations\": [],\r\n    \"typeProperties\": {\r\n      \"folderPath\": \"s3://bucket-name/path/to/folder\",\r\n      \"format\": {\r\n        \"type\": \"JsonFormat\"\r\n      },\r\n      \"compression\": {\r\n        \"type\": \"GZip\"\r\n      },\r\n      \"recursive\": true\r\n    }\r\n  }\r\n}"
 	if testing.Short() {
 		t.Skip("skipping integration test")
@@ -135,4 +135,14 @@ func TestS3(t *testing.T) {
 	}
 
 	assert.Equal(t, wantObj, string(obj))
+
+	if err := client.PutObject(context.Background(), "test/", "new/obj.txt", []byte("foo_data")); err != nil {
+		assert.NoError(t, err)
+		return
+	}
+
+	if err := client.DeleteObject(context.Background(), "test/", "new/obj.txt"); err != nil {
+		assert.NoError(t, err)
+		return
+	}
 }
