@@ -1,5 +1,15 @@
 # Changelog
 
+## v1.1.2 - 2024-04-25
+
+### Fixes
+
+* Tests: Move integration tests to new folder - `tests/integration/integration_test.go`
+
+## v1.1.1 - 2024-04-24
+
+* Docs: fix typos in changelog.
+
 ## v1.1.0 - 2024-04-24
 
 ### Enhancements
