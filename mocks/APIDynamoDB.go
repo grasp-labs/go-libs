@@ -96,6 +96,80 @@ func (_c *APIDynamoDB_PutItem_Call) RunAndReturn(run func(context.Context, *dyna
 	return _c
 }
 
+// Query provides a mock function with given fields: ctx, input, f
+func (_m *APIDynamoDB) Query(ctx context.Context, input *dynamodb.QueryInput, f ...func(*dynamodb.Options)) (*dynamodb.QueryOutput, error) {
+	_va := make([]interface{}, len(f))
+	for _i := range f {
+		_va[_i] = f[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, ctx, input)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for Query")
+	}
+
+	var r0 *dynamodb.QueryOutput
+	var r1 error
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.QueryInput, ...func(*dynamodb.Options)) (*dynamodb.QueryOutput, error)); ok {
+		return rf(ctx, input, f...)
+	}
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.QueryInput, ...func(*dynamodb.Options)) *dynamodb.QueryOutput); ok {
+		r0 = rf(ctx, input, f...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*dynamodb.QueryOutput)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.QueryInput, ...func(*dynamodb.Options)) error); ok {
+		r1 = rf(ctx, input, f...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// APIDynamoDB_Query_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'Query'
+type APIDynamoDB_Query_Call struct {
+	*mock.Call
+}
+
+// Query is a helper method to define mock.On call
+//   - ctx context.Context
+//   - input *dynamodb.QueryInput
+//   - f ...func(*dynamodb.Options)
+func (_e *APIDynamoDB_Expecter) Query(ctx interface{}, input interface{}, f ...interface{}) *APIDynamoDB_Query_Call {
+	return &APIDynamoDB_Query_Call{Call: _e.mock.On("Query",
+		append([]interface{}{ctx, input}, f...)...)}
+}
+
+func (_c *APIDynamoDB_Query_Call) Run(run func(ctx context.Context, input *dynamodb.QueryInput, f ...func(*dynamodb.Options))) *APIDynamoDB_Query_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		variadicArgs := make([]func(*dynamodb.Options), len(args)-2)
+		for i, a := range args[2:] {
+			if a != nil {
+				variadicArgs[i] = a.(func(*dynamodb.Options))
+			}
+		}
+		run(args[0].(context.Context), args[1].(*dynamodb.QueryInput), variadicArgs...)
+	})
+	return _c
+}
+
+func (_c *APIDynamoDB_Query_Call) Return(_a0 *dynamodb.QueryOutput, _a1 error) *APIDynamoDB_Query_Call {
+	_c.Call.Return(_a0, _a1)
+	return _c
+}
+
+func (_c *APIDynamoDB_Query_Call) RunAndReturn(run func(context.Context, *dynamodb.QueryInput, ...func(*dynamodb.Options)) (*dynamodb.QueryOutput, error)) *APIDynamoDB_Query_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // NewAPIDynamoDB creates a new instance of APIDynamoDB. It also registers a testing interface on the mock and a cleanup function to assert the mocks expectations.
 // The first argument is typically a *testing.T value.
 func NewAPIDynamoDB(t interface {

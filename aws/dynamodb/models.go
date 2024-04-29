@@ -10,10 +10,12 @@ import (
 
 type APIDynamoDB interface {
 	PutItem(ctx context.Context, params *dynamodb.PutItemInput, optFns ...func(*dynamodb.Options)) (*dynamodb.PutItemOutput, error)
+	Query(ctx context.Context, input *dynamodb.QueryInput, f ...func(*dynamodb.Options)) (*dynamodb.QueryOutput, error)
 }
 
 type ClientDynamoDB interface {
 	PutItem(ctx context.Context, table string, itemToPut any) error
+	Query(ctx context.Context, tableName, key, value string) (any, error)
 }
 
 type Client struct {

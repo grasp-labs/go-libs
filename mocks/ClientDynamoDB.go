@@ -69,6 +69,67 @@ func (_c *ClientDynamoDB_PutItem_Call) RunAndReturn(run func(context.Context, st
 	return _c
 }
 
+// Query provides a mock function with given fields: ctx, tableName, key, value
+func (_m *ClientDynamoDB) Query(ctx context.Context, tableName string, key string, value string) (interface{}, error) {
+	ret := _m.Called(ctx, tableName, key, value)
+
+	if len(ret) == 0 {
+		panic("no return value specified for Query")
+	}
+
+	var r0 interface{}
+	var r1 error
+	if rf, ok := ret.Get(0).(func(context.Context, string, string, string) (interface{}, error)); ok {
+		return rf(ctx, tableName, key, value)
+	}
+	if rf, ok := ret.Get(0).(func(context.Context, string, string, string) interface{}); ok {
+		r0 = rf(ctx, tableName, key, value)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(interface{})
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(context.Context, string, string, string) error); ok {
+		r1 = rf(ctx, tableName, key, value)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// ClientDynamoDB_Query_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'Query'
+type ClientDynamoDB_Query_Call struct {
+	*mock.Call
+}
+
+// Query is a helper method to define mock.On call
+//   - ctx context.Context
+//   - tableName string
+//   - key string
+//   - value string
+func (_e *ClientDynamoDB_Expecter) Query(ctx interface{}, tableName interface{}, key interface{}, value interface{}) *ClientDynamoDB_Query_Call {
+	return &ClientDynamoDB_Query_Call{Call: _e.mock.On("Query", ctx, tableName, key, value)}
+}
+
+func (_c *ClientDynamoDB_Query_Call) Run(run func(ctx context.Context, tableName string, key string, value string)) *ClientDynamoDB_Query_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(context.Context), args[1].(string), args[2].(string), args[3].(string))
+	})
+	return _c
+}
+
+func (_c *ClientDynamoDB_Query_Call) Return(_a0 interface{}, _a1 error) *ClientDynamoDB_Query_Call {
+	_c.Call.Return(_a0, _a1)
+	return _c
+}
+
+func (_c *ClientDynamoDB_Query_Call) RunAndReturn(run func(context.Context, string, string, string) (interface{}, error)) *ClientDynamoDB_Query_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // NewClientDynamoDB creates a new instance of ClientDynamoDB. It also registers a testing interface on the mock and a cleanup function to assert the mocks expectations.
 // The first argument is typically a *testing.T value.
 func NewClientDynamoDB(t interface {

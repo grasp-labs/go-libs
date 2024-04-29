@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.2.0 - 2024-04-29
+
+### Enhancements
+
+* DynamoDB: Add Query method.
+
+
 ## v1.1.2 - 2024-04-25
 
 ### Fixes

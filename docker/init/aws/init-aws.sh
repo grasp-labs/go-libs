@@ -17,6 +17,31 @@ awslocal --endpoint-url=http://localhost:4566 dynamodb create-table \
     --profile test-profile \
     --output table
 
+awslocal --endpoint-url=http://localhost:4566 dynamodb create-table \
+    --table-name workflow_status_test \
+    --key-schema AttributeName=workflow_id,KeyType=HASH \
+    --attribute-definitions AttributeName=workflow_id,AttributeType=S \
+    --billing-mode PAY_PER_REQUEST \
+    --region "eu-north-1" \
+    --profile test-profile \
+    --output table
+
+awslocal dynamodb put-item \
+    --table-name workflow_status_test \
+    --item '{"workflow_id":{"S":"d3620960-d2cc-4419-930d-78a56b92a206"}, "status":{"S":"in progress"}}' \
+    --region "eu-north-1" \
+     --profile test-profile \
+    --output table
+
+#awslocal dynamodb describe-table \
+#    --table-name workflow_status_test \
+#    --region "eu-north-1"
+
+#awslocal dynamodb get-item \
+#    --table-name workflow_status_test \
+#    --key '{"id":{"S":"1"}}' \
+#    --region "eu-north-1"
+
 awslocal --endpoint-url=http://localhost:4566 s3api create-bucket \
     --bucket test \
     --profile test-profile \

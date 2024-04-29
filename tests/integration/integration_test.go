@@ -110,13 +110,25 @@ func TestDynamoDBIntegration(t *testing.T) {
 		assert.NoError(t, err)
 		return
 	}
+
+	got, err := client.Query(context.Background(), "workflow_status_test", "workflow_id", "d3620960-d2cc-4419-930d-78a56b92a206")
+	if err != nil {
+		assert.NoError(t, err)
+		return
+	}
+
+	var want []map[string]any
+	want = append(want, map[string]any{"workflow_id": "d3620960-d2cc-4419-930d-78a56b92a206", "status": "in progress"})
+	if !assert.Equal(t, want, got) {
+		return
+	}
 }
 
 func TestS3Integration(t *testing.T) {
-	wantObj := "{\r\n  \"name\": \"S3Dataset\",\r\n  \"properties\": {\r\n    \"type\": \"AmazonS3Object\",\r\n    \"linkedServiceName\": {\r\n      \"referenceName\": \"AmazonS3LinkedService\",\r\n      \"type\": \"LinkedServiceReference\"\r\n    },\r\n    \"annotations\": [],\r\n    \"typeProperties\": {\r\n      \"folderPath\": \"s3://bucket-name/path/to/folder\",\r\n      \"format\": {\r\n        \"type\": \"JsonFormat\"\r\n      },\r\n      \"compression\": {\r\n        \"type\": \"GZip\"\r\n      },\r\n      \"recursive\": true\r\n    }\r\n  }\r\n}"
 	if testing.Short() {
 		t.Skip("skipping integration test")
 	}
+	wantObj := "{\r\n  \"name\": \"S3Dataset\",\r\n  \"properties\": {\r\n    \"type\": \"AmazonS3Object\",\r\n    \"linkedServiceName\": {\r\n      \"referenceName\": \"AmazonS3LinkedService\",\r\n      \"type\": \"LinkedServiceReference\"\r\n    },\r\n    \"annotations\": [],\r\n    \"typeProperties\": {\r\n      \"folderPath\": \"s3://bucket-name/path/to/folder\",\r\n      \"format\": {\r\n        \"type\": \"JsonFormat\"\r\n      },\r\n      \"compression\": {\r\n        \"type\": \"GZip\"\r\n      },\r\n      \"recursive\": true\r\n    }\r\n  }\r\n}"
 
 	if err := os.Setenv("BUILDING_MODE", "test"); err != nil {
 		assert.NoError(t, err)
@@ -134,7 +146,9 @@ func TestS3Integration(t *testing.T) {
 		return
 	}
 
-	assert.Equal(t, wantObj, string(obj))
+	if !assert.Equal(t, wantObj, string(obj)) {
+		return
+	}
 
 	if err := client.PutObject(context.Background(), "test/", "new/obj.txt", []byte("foo_data")); err != nil {
 		assert.NoError(t, err)
