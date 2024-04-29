@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.2.2 - 2024-04-29
+
+### Fixes
+
+* Tests: update mockery.
+
 ## v1.2.1 - 2024-04-29
 
 ### Fixes

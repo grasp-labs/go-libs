@@ -70,23 +70,23 @@ func (_c *ClientDynamoDB_PutItem_Call) RunAndReturn(run func(context.Context, st
 }
 
 // Query provides a mock function with given fields: ctx, tableName, key, value
-func (_m *ClientDynamoDB) Query(ctx context.Context, tableName string, key string, value string) (interface{}, error) {
+func (_m *ClientDynamoDB) Query(ctx context.Context, tableName string, key string, value string) ([]map[string]interface{}, error) {
 	ret := _m.Called(ctx, tableName, key, value)
 
 	if len(ret) == 0 {
 		panic("no return value specified for Query")
 	}
 
-	var r0 interface{}
+	var r0 []map[string]interface{}
 	var r1 error
-	if rf, ok := ret.Get(0).(func(context.Context, string, string, string) (interface{}, error)); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, string, string, string) ([]map[string]interface{}, error)); ok {
 		return rf(ctx, tableName, key, value)
 	}
-	if rf, ok := ret.Get(0).(func(context.Context, string, string, string) interface{}); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, string, string, string) []map[string]interface{}); ok {
 		r0 = rf(ctx, tableName, key, value)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(interface{})
+			r0 = ret.Get(0).([]map[string]interface{})
 		}
 	}
 
@@ -120,12 +120,12 @@ func (_c *ClientDynamoDB_Query_Call) Run(run func(ctx context.Context, tableName
 	return _c
 }
 
-func (_c *ClientDynamoDB_Query_Call) Return(_a0 interface{}, _a1 error) *ClientDynamoDB_Query_Call {
+func (_c *ClientDynamoDB_Query_Call) Return(_a0 []map[string]interface{}, _a1 error) *ClientDynamoDB_Query_Call {
 	_c.Call.Return(_a0, _a1)
 	return _c
 }
 
-func (_c *ClientDynamoDB_Query_Call) RunAndReturn(run func(context.Context, string, string, string) (interface{}, error)) *ClientDynamoDB_Query_Call {
+func (_c *ClientDynamoDB_Query_Call) RunAndReturn(run func(context.Context, string, string, string) ([]map[string]interface{}, error)) *ClientDynamoDB_Query_Call {
 	_c.Call.Return(run)
 	return _c
 }
