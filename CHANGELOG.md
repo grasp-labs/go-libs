@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.2.1 - 2024-04-29
+
+### Fixes
+
+* DynamoDB: change from any to []map[string]any in Query function as return param.
+
 ## v1.2.0 - 2024-04-29
 
 ### Enhancements

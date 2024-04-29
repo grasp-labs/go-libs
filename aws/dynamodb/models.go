@@ -15,7 +15,7 @@ type APIDynamoDB interface {
 
 type ClientDynamoDB interface {
 	PutItem(ctx context.Context, table string, itemToPut any) error
-	Query(ctx context.Context, tableName, key, value string) (any, error)
+	Query(ctx context.Context, tableName, key, value string) ([]map[string]any, error)
 }
 
 type Client struct {
