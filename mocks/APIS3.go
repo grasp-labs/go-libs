@@ -170,6 +170,80 @@ func (_c *APIS3_GetObject_Call) RunAndReturn(run func(context.Context, *s3.GetOb
 	return _c
 }
 
+// ListObjectsV2 provides a mock function with given fields: ctx, params, optFns
+func (_m *APIS3) ListObjectsV2(ctx context.Context, params *s3.ListObjectsV2Input, optFns ...func(*s3.Options)) (*s3.ListObjectsV2Output, error) {
+	_va := make([]interface{}, len(optFns))
+	for _i := range optFns {
+		_va[_i] = optFns[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, ctx, params)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for ListObjectsV2")
+	}
+
+	var r0 *s3.ListObjectsV2Output
+	var r1 error
+	if rf, ok := ret.Get(0).(func(context.Context, *s3.ListObjectsV2Input, ...func(*s3.Options)) (*s3.ListObjectsV2Output, error)); ok {
+		return rf(ctx, params, optFns...)
+	}
+	if rf, ok := ret.Get(0).(func(context.Context, *s3.ListObjectsV2Input, ...func(*s3.Options)) *s3.ListObjectsV2Output); ok {
+		r0 = rf(ctx, params, optFns...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*s3.ListObjectsV2Output)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(context.Context, *s3.ListObjectsV2Input, ...func(*s3.Options)) error); ok {
+		r1 = rf(ctx, params, optFns...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// APIS3_ListObjectsV2_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'ListObjectsV2'
+type APIS3_ListObjectsV2_Call struct {
+	*mock.Call
+}
+
+// ListObjectsV2 is a helper method to define mock.On call
+//   - ctx context.Context
+//   - params *s3.ListObjectsV2Input
+//   - optFns ...func(*s3.Options)
+func (_e *APIS3_Expecter) ListObjectsV2(ctx interface{}, params interface{}, optFns ...interface{}) *APIS3_ListObjectsV2_Call {
+	return &APIS3_ListObjectsV2_Call{Call: _e.mock.On("ListObjectsV2",
+		append([]interface{}{ctx, params}, optFns...)...)}
+}
+
+func (_c *APIS3_ListObjectsV2_Call) Run(run func(ctx context.Context, params *s3.ListObjectsV2Input, optFns ...func(*s3.Options))) *APIS3_ListObjectsV2_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		variadicArgs := make([]func(*s3.Options), len(args)-2)
+		for i, a := range args[2:] {
+			if a != nil {
+				variadicArgs[i] = a.(func(*s3.Options))
+			}
+		}
+		run(args[0].(context.Context), args[1].(*s3.ListObjectsV2Input), variadicArgs...)
+	})
+	return _c
+}
+
+func (_c *APIS3_ListObjectsV2_Call) Return(_a0 *s3.ListObjectsV2Output, _a1 error) *APIS3_ListObjectsV2_Call {
+	_c.Call.Return(_a0, _a1)
+	return _c
+}
+
+func (_c *APIS3_ListObjectsV2_Call) RunAndReturn(run func(context.Context, *s3.ListObjectsV2Input, ...func(*s3.Options)) (*s3.ListObjectsV2Output, error)) *APIS3_ListObjectsV2_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // PutObject provides a mock function with given fields: ctx, params, optFns
 func (_m *APIS3) PutObject(ctx context.Context, params *s3.PutObjectInput, optFns ...func(*s3.Options)) (*s3.PutObjectOutput, error) {
 	_va := make([]interface{}, len(optFns))

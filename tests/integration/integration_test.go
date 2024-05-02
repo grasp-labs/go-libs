@@ -159,4 +159,14 @@ func TestS3Integration(t *testing.T) {
 		assert.NoError(t, err)
 		return
 	}
+
+	objects, err := client.GetObjects(context.Background(), "test/", "tenant/c15e32af-71db-4fda-b4e6-2831b1f2b044/workflows/dataset/")
+	if err != nil {
+		assert.NoError(t, err)
+		return
+	}
+
+	if !assert.Equal(t, [][]byte{[]byte(wantObj)}, objects) {
+		return
+	}
 }

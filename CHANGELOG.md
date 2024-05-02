@@ -1,5 +1,12 @@
 # Changelog
 
+
+## v1.3.0 - 2024-05-02
+
+### Enhancements
+
+* S3: add get objects function.
+
 ## v1.2.2 - 2024-04-29
 
 ### Fixes
