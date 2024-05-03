@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.4.1 - 2024-05-03
+
+### Fixes
+
+* S3: add missing mock files.
+
 ## v1.4.0 - 2024-05-03
 
 ### Enhancements
