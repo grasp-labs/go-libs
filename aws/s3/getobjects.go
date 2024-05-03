@@ -8,19 +8,21 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
-func (c *Client) GetObjects(ctx context.Context, bucket, key string) ([][]byte, error) {
+// GetObjects retrieves objects from the specified bucket with keys prefixed by the given key.
+// It returns a map where key is s3 bucket key, and value is s3 object data.
+func (c *Client) GetObjects(ctx context.Context, bucket, key string) (map[string][]byte, error) {
 	keys, err := c.listObjects(ctx, bucket, key)
 	if err != nil {
 		return nil, err
 	}
 
-	result := [][]byte{}
+	result := map[string][]byte{}
 	for _, v := range keys {
 		obj, err := c.GetObject(ctx, bucket, *v.Key)
 		if err != nil {
 			return nil, err
 		}
-		result = append(result, obj)
+		result[*v.Key] = obj
 	}
 
 	return result, nil

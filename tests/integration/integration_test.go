@@ -166,7 +166,7 @@ func TestS3Integration(t *testing.T) {
 		return
 	}
 
-	if !assert.Equal(t, [][]byte{[]byte(wantObj)}, objects) {
+	if !assert.Equal(t, map[string][]byte{"tenant/c15e32af-71db-4fda-b4e6-2831b1f2b044/workflows/dataset/dataset.json": []byte(wantObj)}, objects) {
 		return
 	}
 }

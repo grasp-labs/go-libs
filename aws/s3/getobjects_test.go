@@ -33,7 +33,7 @@ func TestClient_GetObjects(t *testing.T) {
 		name    string
 		fields  fields
 		args    args
-		want    [][]byte
+		want    map[string][]byte
 		wantErr string
 		setup   func(f *fields)
 	}{
@@ -102,7 +102,7 @@ func TestClient_GetObjects(t *testing.T) {
 				bucket: bucket,
 				key:    key,
 			},
-			want: [][]byte{[]byte(data)},
+			want: map[string][]byte{key: []byte(data)},
 			setup: func(f *fields) {
 				s3Mock := mocks.NewAPIS3(t)
 				s3Mock.

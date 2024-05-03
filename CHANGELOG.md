@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.4.0 - 2024-05-03
+
+### Enhancements
+
+* S3: change return value for get objects, now returns
+map where key is s3 bucket key, and data is s3 object data.
 
 ## v1.3.0 - 2024-05-02
 

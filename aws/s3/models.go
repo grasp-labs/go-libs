@@ -16,7 +16,7 @@ type APIS3 interface {
 
 type ClientS3 interface {
 	GetObject(ctx context.Context, bucket, key string) ([]byte, error)
-	GetObjects(ctx context.Context, bucket, key string) ([][]byte, error)
+	GetObjects(ctx context.Context, bucket, key string) (map[string][]byte, error)
 	PutObject(ctx context.Context, bucket, key string, data []byte) error
 	DeleteObject(ctx context.Context, bucketName, key string) error
 }
